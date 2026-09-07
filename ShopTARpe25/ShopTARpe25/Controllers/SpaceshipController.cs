@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ShopTAR25.Controllers
+namespace ShopTARpe25.Controllers
 {
     public class SpaceshipController : Controller
     {

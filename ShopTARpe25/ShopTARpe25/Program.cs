@@ -1,4 +1,4 @@
-namespace ShopTAR25
+namespace ShopTARpe25
 {
     public class Program
     {

@@ -1,6 +1,0 @@
-<Solution>
-  <Project Path="ShopTAR25.ApplicationServices/ShopTAR25.ApplicationServices.csproj" />
-  <Project Path="ShopTAR25.Core/ShopTAR25.Core.csproj" />
-  <Project Path="ShopTAR25.Data/ShopTAR25.Data.csproj" />
-  <Project Path="ShopTAR25/ShopTAR25.csproj" />
-</Solution>

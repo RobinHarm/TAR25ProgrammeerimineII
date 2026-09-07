@@ -1,4 +1,4 @@
-namespace ShopTAR25.Models
+namespace ShopTARpe25.Models
 {
     public class ErrorViewModel
     {

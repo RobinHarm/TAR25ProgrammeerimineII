@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using ShopTAR25.Models;
+using ShopTARpe25.Models;
 using System.Diagnostics;
 
-namespace ShopTAR25.Controllers
+namespace ShopTARpe25.Controllers
 {
     public class HomeController : Controller
     {
