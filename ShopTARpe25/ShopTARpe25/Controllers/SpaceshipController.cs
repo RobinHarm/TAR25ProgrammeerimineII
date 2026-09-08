@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopTARpe25.Models.Spaceship;
 
 namespace ShopTARpe25.Controllers
 {
@@ -20,7 +21,7 @@ namespace ShopTARpe25.Controllers
         //kui oled teinud vormi, siis see meetod käivitatakse
         //saadab andmed serverisse, kus need salvestatakse andmebaasi
         [HttpPost]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(SpaceshipCreateViewModel vm)
         {
             return RedirectToAction(nameof(Index));
         }
