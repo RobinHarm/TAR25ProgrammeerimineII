@@ -4,6 +4,7 @@ using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
 using ShopTARpe25.Data;
 using ShopTARpe25.Models.Spaceship;
+using ShopTARpe25.ApplicationServices.Services;
 
 
 namespace ShopTARpe25.Controllers
@@ -11,22 +12,38 @@ namespace ShopTARpe25.Controllers
     public class SpaceshipController : Controller
     {
         private readonly ISpaceshipServices _spaceshipService;
+        private readonly ShopTARpe25Context _context;
 
         public SpaceshipController
             (
+            ShopTARpe25Context context,
             ISpaceshipServices spaceshipService
             )
         {
+            _context =context;
             _spaceshipService = spaceshipService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            //loome vaheinstantsi domaini ja ViewModeli vahel.
+            var result = _context.Spaceships
+                .Select(x => new SpaceshipIndexViewModel
+                {
+                    Id = x.Id,
+                    Classification = x.Classification,
+                    Crew = x.Crew,
+                    Name = x.Name,
+                    EnginePower = x.EnginePower,
+                    BuiltDate = x.BuiltDate
+                });
+
+            return View(result);
         }
 
         //kui kasutaja klikib "Create" nuppu, siis see meetod käivitatakse
         //tagastab kasutajale vormi, kuhu saab sisestada andmed
+        //Lisage context
         [HttpGet]
         public IActionResult Create()
         {
