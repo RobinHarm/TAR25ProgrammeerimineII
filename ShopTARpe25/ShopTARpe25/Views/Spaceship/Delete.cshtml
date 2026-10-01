@@ -1,9 +1,11 @@
-﻿@model ShopTARpe25.Models.Spaceship.SpaceshipDetailsViewModel
+﻿@model ShopTARpe25.Models.Spaceship.SpaceshipDeleteViewModel
 
-<h1>Details</h1>
+See on Delete vaade ja samasugune nagu details vaade. Teha ise valmis
+
+<h1>Delete</h1>
 
 <div>
-    <h4>Spaceships</h4>
+    <h4>Spaceship</h4>
     <hr />
 
     <dl class="row">
@@ -62,6 +64,13 @@
         </div>
     </dl>
 
-    <a asp-action="Index" asp-controller="spaceship" class="btn btn-danger">Back to List</a>
+    <hr />
+    <form asp-action="DeleteConfirmation">
+        <input type="hidden" asp-for="Id"/>
+        <input type="submit" value="Delete" class="btn btn-danger"/>
+        <a asp-action="Index" asp-controller="spaceship"class="btn btn-success">Back</a>
+    </form>
 
 </div>
+
+
