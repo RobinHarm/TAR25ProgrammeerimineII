@@ -1,4 +1,6 @@
-﻿namespace ShopTARpe25.Models.Spaceship
+﻿using ShopTARpe25.Core.Dto;
+
+namespace ShopTARpe25.Models.Spaceship
 {
     public class SpaceshipCreateViewModel
     {
@@ -8,6 +10,12 @@
         public DateTime? BuiltDate { get; set; }
         public int? Crew { get; set; }
         public int? EnginePower { get; set; }
+
+        public List<IFormFile> Files { get; set; }
+        public List<ImageViewModel> Image { get; set; }
+            = new List<ImageViewModel>();
+        public IEnumerable<FileToApiDto> FileToApiDtos { get; set; }
+            = new List<FileToApiDto>();
 
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
