@@ -14,8 +14,6 @@ namespace ShopTARpe25.Models.Spaceship
         public List<IFormFile> Files { get; set; }
         public List<ImageViewModel> Image { get; set; }
             = new List<ImageViewModel>();
-        public IEnumerable<FileToApiDto> FileToApiDtos { get; set; }
-            = new List<FileToApiDto>();
 
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
