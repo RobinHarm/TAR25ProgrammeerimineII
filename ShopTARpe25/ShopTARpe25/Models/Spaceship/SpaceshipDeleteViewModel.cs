@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ShopTARpe25.Core.Dto
+﻿namespace ShopTARpe25.Models.Spaceship
 {
-    //Dto class vahendab andmeid controlleri ja service classide vahel.
-    public class SpaceshipDto
+    public class SpaceshipDeleteViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
@@ -14,7 +9,7 @@ namespace ShopTARpe25.Core.Dto
         public int? Crew { get; set; }
         public int? EnginePower { get; set; }
 
-        public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
     }
 }
