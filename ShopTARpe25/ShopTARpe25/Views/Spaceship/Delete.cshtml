@@ -70,7 +70,11 @@ See on Delete vaade ja samasugune nagu details vaade. Teha ise valmis
         <input type="submit" value="Delete" class="btn btn-danger"/>
         <a asp-action="Index" asp-controller="spaceship"class="btn btn-success">Back</a>
     </form>
-
+    @foreach (var images in Model.Images)
+    {
+        <partial name="_Images" model="images" />
+        <br />
+    }
 </div>
 
 
