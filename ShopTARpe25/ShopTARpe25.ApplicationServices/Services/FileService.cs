@@ -75,7 +75,7 @@ namespace ShopTARpe25.ApplicationServices.Services
             //kus asuvad failid, mida hakkatakse kustutama
             var filePath = _webHost.ContentRootPath + "\\wwwroot\\multipleFileUpload\\"
                 + imageId.ExistingFilePath;
-            
+
             //kui fail on olemas, siis kustuta see
             if (File.Exists(filePath))
             {
@@ -89,4 +89,3 @@ namespace ShopTARpe25.ApplicationServices.Services
         }
     }
 }
-
