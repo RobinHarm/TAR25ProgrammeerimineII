@@ -64,17 +64,19 @@ See on Delete vaade ja samasugune nagu details vaade. Teha ise valmis
         </div>
     </dl>
 
+    @foreach (var images in Model.Images)
+    {
+        <partial name="_Images" model="images" />
+        <br />
+    }
+
     <hr />
     <form asp-action="DeleteConfirmation">
         <input type="hidden" asp-for="Id"/>
         <input type="submit" value="Delete" class="btn btn-danger"/>
         <a asp-action="Index" asp-controller="spaceship"class="btn btn-success">Back</a>
     </form>
-    @foreach (var images in Model.Images)
-    {
-        <partial name="_Images" model="images" />
-        <br />
-    }
+
 </div>
 
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using ShopTARpe25.Core.Domain;
 using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
@@ -43,6 +44,8 @@ namespace ShopTARpe25.ApplicationServices.Services
                     string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
+                    //iga kord, kui faili laed ülesse, siis tehakse see väikesteks 
+                    //tükkideks
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
                         file.CopyTo(fileStream);
@@ -50,6 +53,8 @@ namespace ShopTARpe25.ApplicationServices.Services
                         //domaini teha FileToApi
                         FileToApi path = new FileToApi
                         {
+                            //tuleb ära mappida 
+                            //domain ja ??
                             Id = Guid.NewGuid(),
                             ExistingFilePath = uniqueFileName,
                             SpaceshipId = domain.Id
@@ -60,5 +65,28 @@ namespace ShopTARpe25.ApplicationServices.Services
                 }
             }
         }
+
+        public async Task<FileToApi> RemoveImageFromApi(FileToApiDto dto)
+        {
+            //kui on vaja kustuda fail, siis tuleb see üles leida
+            var imageId = await _context.FileToApis
+                .FirstOrDefaultAsync(x => x.Id == dto.Id);
+
+            //kus asuvad failid, mida hakkatakse kustutama
+            var filePath = _webHost.ContentRootPath + "\\wwwroot\\multipleFileUpload\\"
+                + imageId.ExistingFilePath;
+            
+            //kui fail on olemas, siis kustuta see
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+            _context.FileToApis.Remove(imageId);
+            await _context.SaveChangesAsync();
+
+            return imageId;
+        }
     }
 }
+
