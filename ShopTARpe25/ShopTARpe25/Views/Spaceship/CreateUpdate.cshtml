@@ -1,5 +1,15 @@
 ﻿@model ShopTARpe25.Models.Spaceship.SpaceshipCreateViewModel
 
+@if (Model.Id.HasValue)
+{
+    <h1>Spaceship Update</h1>
+}
+else
+{
+    <h1>Spaceship Create</h1>    
+}
+
+
 <div>
     Spaceship Create
 </div>
