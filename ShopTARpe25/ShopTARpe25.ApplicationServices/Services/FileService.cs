@@ -88,7 +88,7 @@ namespace ShopTARpe25.ApplicationServices.Services
             return imageId;
         }
 
-        public async Task<FileToApi> RemoveImagesFromApi(FileToApiDto[] dto)
+        public async Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDto[] dto)
         {
             foreach (var image in dto)
             {

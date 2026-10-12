@@ -75,6 +75,7 @@ namespace ShopTARpe25.ApplicationServices.Services
             spaceship.EnginePower = dto.EnginePower;
             spaceship.CreatedAt = dto.CreatedAt;
             spaceship.ModifiedAt = DateTime.Now;
+            _fileServices.FilesToApi(dto, spaceship);
 
             _context.Spaceships.Update(spaceship);
             await _context.SaveChangesAsync();

@@ -177,7 +177,15 @@ namespace ShopTARpe25.Controllers
                 EnginePower = vm.EnginePower,
                 BuiltDate = vm.BuiltDate,
                 CreatedAt = vm.CreatedAt,
-                ModifiedAt = vm.ModifiedAt
+                ModifiedAt = vm.ModifiedAt,
+                Files = vm.Files,
+                FileToApiDtos = vm.Images
+                    .Select(file => new FileToApiDto
+                    {
+                        Id = file.ImageId,
+                        ExistingFilePath = file.FilePath,
+                        SpaceshipId = file.SpaceshipId
+                    }).ToArray()
             };
 
             var result = await _spaceshipService.Update(dto);
