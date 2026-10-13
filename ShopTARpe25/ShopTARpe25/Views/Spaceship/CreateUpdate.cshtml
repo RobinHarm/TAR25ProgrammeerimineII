@@ -1,4 +1,4 @@
-﻿@model ShopTARpe25.Models.Spaceship.SpaceshipCreateViewModel
+﻿@model ShopTARpe25.Models.Spaceship.SpaceshipCreateUpdateViewModel
 
 @if (Model.Id.HasValue)
 {
@@ -6,13 +6,9 @@
 }
 else
 {
-    <h1>Spaceship Create</h1>    
+    <h1>Spaceship Create</h1>
 }
 
-
-<div>
-    Spaceship Create
-</div>
 
 <form method="post" enctype="multipart/form-data">
     <input asp-for="Id" type="hidden" />
@@ -61,15 +57,28 @@ else
             <input asp-for="Files" class="form-control" type="file" multiple />
         </div>
     </div>
+   
+    <div>
+        @foreach (var images in Model.Image)
+        {
+            <partial name="_Images" model="images" />
+            <input asp-action="removeImage" asp-controller="spaceship" asp-route-imageId="@images.ImageId"
+                   type="submit" class="btn btn-danger" value="Remove Image" />
+        }
+    </div>
+    
+    <hr />
 
-    @foreach (var file in Model.Image)
+    @if (Model.Id.HasValue)
     {
-        <partial name="_Images" model="file" />
+        <input asp-action="update" asp-controller="spaceship" type="submit" class="btn btn-primary" value="Update" />
+    }
+    else
+    {
+        <input asp-action="create" asp-controller="spaceship" type="submit" class="btn btn-primary" value="Create" />
     }
 
-    <input asp-action="create" asp-controller="spaceship" type="submit" class="btn btn-primary" value="Create" />
     <a asp-action="Index" asp-controller="spaceship" class="btn btn-secondary">Back to List</a>
 
 </form>
-
 
