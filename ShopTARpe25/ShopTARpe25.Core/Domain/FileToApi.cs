@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShopTARpe25.Core.Domain
 {
-    internal class FileToApi
+    public class FileToApi
     {
         public Guid Id { get; set; }
 
