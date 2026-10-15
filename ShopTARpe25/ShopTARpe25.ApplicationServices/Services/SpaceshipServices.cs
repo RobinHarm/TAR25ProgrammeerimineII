@@ -36,7 +36,6 @@ namespace ShopTARpe25.ApplicationServices.Services
             domain.EnginePower = dto.EnginePower;
             domain.CreatedAt = DateTime.Now;
             domain.ModifiedAt = DateTime.Now;
-
             _fileServices.FilesToApi(dto, domain);
 
             //siia tuleb kood, mis salvestab domain
