@@ -47,7 +47,7 @@ namespace ShopTARpe25.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(KindergartenCreateViewModel vm)
+        public async Task<IActionResult> Create(KindergartenCreateUpdateViewModel vm)
         {
             var dto = new KindergartenDto
             {
