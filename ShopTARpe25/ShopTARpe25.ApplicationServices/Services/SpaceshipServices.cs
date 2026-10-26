@@ -94,13 +94,11 @@ namespace ShopTARpe25.ApplicationServices.Services
                 {
                     Id = y.Id,
                     SpaceshipId = y.SpaceshipId,
-                    ExistingFilePath = y.ExistingFilePath
-                })
-                .ToArrayAsync();
-                
+                    ExistingFilePath = y.ExistingFilePath,
+                }).ToArrayAsync();
 
-           await _fileServices.RemoveImagesFromApi(images);
-            
+            //peame kutsuma meetodi esile, mis kustutab failid serverist
+            await _fileServices.RemoveImagesFromApi(images);
             _context.Spaceships.Remove(result);
             await _context.SaveChangesAsync();
 
