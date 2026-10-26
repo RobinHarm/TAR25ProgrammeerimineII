@@ -1,6 +1,6 @@
 ﻿@model ShopTARpe25.Models.Spaceship.SpaceshipDeleteViewModel
 
-
+See on Delete vaade ja samasugune nagu details vaade. Teha ise valmis
 
 <h1>Delete</h1>
 
@@ -64,11 +64,18 @@
         </div>
     </dl>
 
+    @foreach (var images in Model.Images)
+    {
+        <partial name="_Images" model="images" />
+        <br />
+    }
+
     <hr />
     <form asp-action="DeleteConfirmation">
-        <input type="hidden" asp-for="Id"/>
-        <input type="submit" value="Delete" class="btn btn-danger"/>
-        <a asp-action="Index" asp-controller="spaceship"class="btn btn-success">Back</a>
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" asp-controller="spaceship" class="btn btn-success">Back</a>
     </form>
 
 </div>
+

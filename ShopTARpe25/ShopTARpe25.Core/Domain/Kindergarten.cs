@@ -6,7 +6,7 @@ namespace ShopTARpe25.Core.Domain
 {
     public class Kindergarten
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public string GroupName { get; set; } = string.Empty;
         public int? ChildrenCount { get; set; }
         public string KinderGartenName { get; set; } = string.Empty;

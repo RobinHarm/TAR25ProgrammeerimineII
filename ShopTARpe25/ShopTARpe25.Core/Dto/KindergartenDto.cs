@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,10 +7,13 @@ namespace ShopTARpe25.Core.Dto
 {
     public class KindergartenDto
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public string GroupName { get; set; } = string.Empty;
         public int? ChildrenCount { get; set; }
         public string KinderGartenName { get; set; } = string.Empty;
+        public List<IFormFile> Files { get; set; }
+        public IEnumerable<FileToApiDto> FileToApiDtos { get; set; }
+            = new List<FileToApiDto>();
         public string TeacherName { get; set; } = string.Empty;
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; }

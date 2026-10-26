@@ -43,7 +43,9 @@ namespace ShopTARpe25.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            KindergartenCreateUpdateViewModel vm = new();
+
+            return View("CreateUpdate", vm);
         }
 
         [HttpPost]
