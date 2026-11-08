@@ -64,7 +64,7 @@ namespace ShopTARpe25.ApplicationServices.Services
         {
             Spaceship spaceship = new();
 
-            spaceship.Id = Guid.NewGuid();
+            spaceship.Id = dto.Id;
             spaceship.Name = dto.Name;
             spaceship.Classification = dto.Classification;
             spaceship.BuiltDate = dto.BuiltDate;
