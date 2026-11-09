@@ -18,7 +18,8 @@
                 <th scope="col">Nr</th>
                 <th scope="col">Name</th>
                 <th scope="col">Type</th>
-                <th scope="col">Built Date</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Engine Power</th>
                 <th scope="col">Crew</th>
                 <th scope="col"></th>
             </tr>
@@ -30,7 +31,8 @@
                     <td>@rowNumber</td>
                     <td>@spaceship.Name</td>
                     <td>@spaceship.Classification</td>
-                    <td>@spaceship.BuiltDate</td>
+                    <td>@spaceship.CreatedAt</td>
+                    <td>@spaceship.EnginePower</td>
                     <td>@spaceship.Crew</td>
                     <td>
                         <a asp-action="details" asp-controller="Spaceship" asp-route-id="@spaceship.Id" type="submit" class="btn btn-info">Details</a>
