@@ -10,7 +10,7 @@
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; }
         public List<IFormFile> Files { get; set; }
-        public List<KindergartenImageViewModel> Image { get; set; }
+        public List<KindergartenImageViewModel> Images { get; set; }
             = new List<KindergartenImageViewModel>();
 
     }

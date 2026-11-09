@@ -32,9 +32,12 @@ namespace ShopTARpe25.ApplicationServices.Services
             domain.TeacherName = dto.TeacherName;
             domain.CreatedAt = DateTime.Now;
             domain.UpdatedAt = DateTime.Now;
-            _fileServices.FilesToApi(dto, domain);
 
             await _context.Kindergartens.AddAsync(domain);
+            await _context.SaveChangesAsync();
+
+            _fileServices.FilesToApi(dto, domain);
+
             await _context.SaveChangesAsync();
 
             return domain;

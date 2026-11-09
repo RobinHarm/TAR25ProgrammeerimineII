@@ -98,33 +98,39 @@ namespace ShopTARpe25.ApplicationServices.Services
 
         public void FilesToApi(KindergartenDto dto, Kindergarten domain)
         {
-            if (dto.Files != null && dto.Files.Count > 0)
+            if (dto.Files == null || dto.Files.Count == 0)
+                return;
+
+            string uploadsFolder = Path.Combine(
+                _webHost.ContentRootPath,
+                "wwwroot",
+                "multipleFileUpload"
+            );
+
+            if (!Directory.Exists(uploadsFolder))
             {
-                if (!Directory.Exists(_webHost.ContentRootPath + "\\wwwroot\\multipleFileUpload\\"))
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            foreach (var file in dto.Files)
+            {
+                string uniqueFileName = Guid.NewGuid() + "_" + Path.GetFileName(file.FileName);
+
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    Directory.CreateDirectory(_webHost.ContentRootPath + "\\wwwroot\\multipleFileUpload\\");
+                    file.CopyTo(fileStream);
                 }
 
-                foreach (var file in dto.Files)
+                FileToApi path = new FileToApi
                 {
-                    string uploadsFolder = Path.Combine(_webHost.ContentRootPath, "wwwroot", "multipleFileUpload");
-                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    Id = Guid.NewGuid(),
+                    ExistingFilePath = uniqueFileName,
+                    KindergartenId = domain.Id
+                };
 
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        file.CopyTo(fileStream);
-
-                        FileToApi path = new FileToApi
-                        {
-                            Id = Guid.NewGuid(),
-                            ExistingFilePath = uniqueFileName,                       
-                            KindergartenId = domain.Id
-                        };
-
-                        _context.FileToApis.AddAsync(path);
-                    }
-                }
+                _context.FileToApis.Add(path);
             }
         }
     }

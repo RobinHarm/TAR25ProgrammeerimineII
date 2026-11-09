@@ -66,7 +66,7 @@ namespace ShopTARpe25.Controllers
                 CreatedAt = vm.CreatedAt,
                 UpdatedAt = vm.UpdatedAt,
                 Files = vm.Files,
-                FileToApiDtos = vm.Image
+                FileToApiDtos = vm.Images
                 .Select(file => new FileToApiDto
                 {
                     Id = file.ImageId,
@@ -140,7 +140,7 @@ namespace ShopTARpe25.Controllers
             vm.TeacherName = children.TeacherName;
             vm.CreatedAt = children.CreatedAt;
             vm.UpdatedAt = children.UpdatedAt;
-            vm.Image.AddRange(images);
+            vm.Images.AddRange(images);
 
             return View("CreateUpdate", vm);
         }
