@@ -12,15 +12,15 @@ using ShopTARpe25.Data;
 namespace ShopTARpe25.Data.Migrations
 {
     [DbContext(typeof(ShopTARpe25Context))]
-    [Migration("20261013100602_Init")]
-    partial class Init
+    [Migration("20261109124500_fiels")]
+    partial class fiels
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.12")
+                .HasAnnotation("ProductVersion", "10.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -40,6 +40,35 @@ namespace ShopTARpe25.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FileToApis");
+                });
+
+            modelBuilder.Entity("ShopTARpe25.Core.Domain.RealEstate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("Area")
+                        .HasColumnType("float");
+
+                    b.Property<string>("BuildingType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RoomNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Realestates");
                 });
 
             modelBuilder.Entity("ShopTARpe25.Core.Domain.Spaceship", b =>
