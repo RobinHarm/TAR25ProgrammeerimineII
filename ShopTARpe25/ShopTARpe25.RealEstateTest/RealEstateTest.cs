@@ -36,10 +36,7 @@ namespace ShopTARpe25.RealEstateTest
 
         }
 
-
-        //teha test, kus otsib ankeeti id alusel, aga seda ei ole andmebaasis
-        public class RealEstateTest2 : TestBase
-        {
+        //teha test, kus otsib ankeeti id alusel, aga seda ei ole andmebaasis 
             [Fact]
             public async Task ShouldNot_FindRealEstate_WhenIdDoesNotExist()
             {
@@ -53,7 +50,17 @@ namespace ShopTARpe25.RealEstateTest
                 // Assert
                 //vastupidist loogikat tuleb kasutada
                 Assert.NotEqual(wrongGuid, databaseGuid);
+            }  
+
+            [Fact]
+            //mul on vaja testida  DetailsAsync meetodit
+            //leiab ankeedi üless e õige id-ga otsib
+            public async Task Should_GetByIdRealEstate_WhenReturnsEqual()
+            {
+            Guid guid = Guid.Parse("3dc05ba8-b2b4-4c03-967e-a9bcea734eb1");
+            Guid databaseGuid = Guid.Parse("3dc05ba8-b2b4-4c03-967e-a9bcea734eb1");
+           var result = await Svc<IRealEstateServices>().DetailsAsync(guid);
+            Assert.Equal(databaseGuid, guid);
             }
-        }
     }
 }
