@@ -23,7 +23,6 @@ namespace ShopTARpe25.ApplicationServices.Services
             _context = context;
             _fileServices = fileServices;
         }
-
         public async Task<RealEstate> Create(RealEstateDto dto)
         {
             RealEstate domain = new();
@@ -35,73 +34,75 @@ namespace ShopTARpe25.ApplicationServices.Services
             domain.BuildingType = dto.BuildingType;
             domain.CreatedAt = DateTime.Now;
             domain.ModifiedAt = DateTime.Now;
-            //peame saama File teenuse välja kutsuda,
-            //mis salvestab failid serverisse
-            _fileServices.FilesToApi(dto, domain);
+
+           if (dto.Files != null)
+           {
+                _fileServices.UploadFilesToDatabase(dto, domain);
+            }
+
+            await _context.RealEstates.AddAsync(domain);
+            await _context.SaveChangesAsync();
+
+            return domain;
+
+        }
 
 
-            //siia tuleb kood, mis salvestab domain
-            //objekti andmebaasi
-            //tuleb kasutada repository'd, mis
-            //on defineeritud Core projektis
-            //konstruktori kaudu tuleb injectida repository
+        public async Task<RealEstate> Update(RealEstateDto dto)
+        {
+            RealEstate domain = new();
 
-            await _context.Realestates.AddAsync(domain);
+            domain.Id = dto.Id;
+            domain.Area = dto.Area;
+            domain.Address = dto.Address;
+            domain.RoomNumber = dto.RoomNumber;
+            domain.BuildingType = dto.BuildingType;
+            domain.CreatedAt = dto.CreatedAt;
+            domain.ModifiedAt = DateTime.Now;
+
+            if(dto.Files != null)
+            {
+                _fileServices.UploadFilesToDatabase(dto, domain);
+            }
+
+            _context.RealEstates.Update(domain);
             await _context.SaveChangesAsync();
 
             return domain;
         }
 
-        //siia teha meetod nimega DetailsAsync
-        //see ainult p'rib andmed contextist
-        public async Task<RealEstate> DetailsAsync(Guid id)
+        public async Task<RealEstate> DetailsAsync(Guid Id)
         {
-            var result = await _context.Realestates
-                .FirstOrDefaultAsync(x => x.Id == id);
+            var result = await _context.RealEstates
+            .FirstOrDefaultAsync(x => x.Id == Id);
+
 
             return result;
         }
 
-        public async Task<RealEstate> Update(RealEstateDto dto)
+        public async Task<RealEstate> Delete(Guid Id)
         {
-            RealEstate realEstate = new();
 
-            realEstate.Id = dto.Id;
-            realEstate.Area = dto.Area;
-            realEstate.Address = dto.Address;
-            realEstate.RoomNumber = dto.RoomNumber;
-            realEstate.BuildingType = dto.BuildingType;
-            realEstate.CreatedAt = dto.CreatedAt;
-            realEstate.ModifiedAt = DateTime.Now;
-            _fileServices.FilesToApi(dto, realEstate);
+            var result = await _context.RealEstates
+                .FirstOrDefaultAsync(x => x.Id == Id);
 
-            _context.Realestates.Update(realEstate);
-            await _context.SaveChangesAsync();
-
-            return realEstate;
-        }
-
-        public async Task<RealEstate> Delete(Guid id)
-        {
-            var result = await _context.Realestates
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            var images = await _context.FileToApis
-                .Where(x => x.RealEstateId == id)
-                .Select(y => new FileToApiDto
+            var images = await _context.FileToDatabases
+                .Where(x => x.RealEstateId == Id)
+                .Select(y => new FileToDatabaseDto
                 {
                     Id = y.Id,
-                    RealEstateId = y.RealEstateId,
-                    ExistingFilePath = y.ExistingFilePath,
+                    ImageTitle = y.ImageTitle,
+                    RealEstateId = y.RealEstateId
                 }).ToArrayAsync();
 
-            //peame kutsuma meetodi esile, mis kustutab failid serverist
-            await _fileServices.RemoveImagesFromApi(images);
-            _context.Realestates.Remove(result);
+            await _fileServices.RemoveImagesFromDatabase(images);
+            await _context.RealEstates
+                    .Where(x => x.Id == Id)
+                    .ExecuteDeleteAsync();
+
             await _context.SaveChangesAsync();
 
             return result;
         }
     }
 }
-

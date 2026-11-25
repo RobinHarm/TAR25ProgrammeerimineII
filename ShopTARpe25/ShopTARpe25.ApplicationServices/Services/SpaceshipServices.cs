@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using ShopTARpe25.Core.Domain;
 using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
@@ -23,7 +24,6 @@ namespace ShopTARpe25.ApplicationServices.Services
             _context = context;
             _fileServices = fileServices;
         }
-
         public async Task<Spaceship> Create(SpaceshipDto dto)
         {
             Spaceship domain = new();
@@ -36,10 +36,10 @@ namespace ShopTARpe25.ApplicationServices.Services
             domain.EnginePower = dto.EnginePower;
             domain.CreatedAt = DateTime.Now;
             domain.ModifiedAt = DateTime.Now;
-            //peame saama File teenuse välja kutsuda,
+            //peame saama File teenusest välja kutsuda meetod,
             //mis salvestab failid serverisse
             _fileServices.FilesToApi(dto, domain);
-
+            
 
             //siia tuleb kood, mis salvestab domain
             //objekti andmebaasi
@@ -51,14 +51,14 @@ namespace ShopTARpe25.ApplicationServices.Services
             await _context.SaveChangesAsync();
 
             return domain;
+
         }
 
-        //siia teha meetod nimega DetailsAsync
-        //see ainult p'rib andmed contextist
         public async Task<Spaceship> DetailsAsync(Guid id)
         {
             var result = await _context.Spaceships
                 .FirstOrDefaultAsync(x => x.Id == id);
+
 
             return result;
         }
@@ -83,18 +83,19 @@ namespace ShopTARpe25.ApplicationServices.Services
             return spaceship;
         }
 
-        public async Task<Spaceship> Delete(Guid id)
+        public async Task<Spaceship> Delete(Guid Id)
         {
+
             var result = await _context.Spaceships
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == Id);
 
             var images = await _context.FileToApis
-                .Where(x => x.SpaceshipId == id)
+                .Where(x => x.SpaceshipId == Id)
                 .Select(y => new FileToApiDto
                 {
                     Id = y.Id,
                     SpaceshipId = y.SpaceshipId,
-                    ExistingFilePath = y.ExistingFilePath,
+                    ExistingFilePath = y.ExistingFilePath
                 }).ToArrayAsync();
 
             //peame kutsuma meetodi esile, mis kustutab failid serverist

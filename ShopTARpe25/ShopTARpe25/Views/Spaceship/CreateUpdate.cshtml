@@ -2,13 +2,16 @@
 
 @if (Model.Id.HasValue)
 {
-    <h1>Spaceship Update</h1>
+    <h1>Spaceship</h1>
 }
 else
 {
     <h1>Spaceship Create</h1>
 }
 
+<div>
+    Spaceship Create
+</div>
 
 <form method="post" enctype="multipart/form-data">
     <input asp-for="Id" type="hidden" />
@@ -52,34 +55,37 @@ else
 
     See koht on failide üleslaadimise vorm.
     <div class="form-group row">
-        <label asp-for="Files" class="col-sm-2 col-form-label"></label>
+        <label asp-for="Files" class="col col-form-label"></label>
         <div class="col-sm-5">
             <input asp-for="Files" class="form-control" type="file" multiple />
         </div>
     </div>
+
+    <div>
+    @foreach (var images in Model.Image)
+    {
+        <partial name="_Images" model="images" />
+        <input asp-action="removeImage" asp-controller="spaceship" asp-route-imageId="@images.ImageId"
+            type="submit" class="btn-btn-outline-danger" value="Remove Image" />
+    }
+    </div>
+
+    <hr />
+
+    @if (Model.Id.HasValue)
+    {
+        <input asp-action="update" asp-controller="spaceship" type="submit" class="btn btn-primary" value="Update" />
+
+    }
+    else
+    {
+        <input asp-action="create" asp-controller="spaceship" type="submit" class="btn btn-primary" value="Create" />
+    }
+
+   <div class="form-group">
    
-        <div>
-        @foreach (var images in Model.Image)
-            {
-                <partial name="_Images" model="images" />
-                <input asp-action="removeImage" asp-controller="spaceship" asp-route-imageId="@images.ImageId"
-                       type="submit" class="btn btn-danger" value="Remove Image" />
-            }
-        </div>
-    
-        <hr />
-
-        @if (Model.Id.HasValue) 
-        {
-            <input asp-action="update" asp-controller="spaceship" type="submit" class="btn btn-primary" value="Update" />
-        }
-        else
-        {
-            <input asp-action="create" asp-controller="spaceship" type="submit" class="btn btn-primary" value="Create" />
-        }
-
-    <a asp-action="Index" asp-controller="spaceship" class="btn btn-secondary">Back to List</a>
-
+   <a asp-action="Index" asp-controller="spaceship" class="btn btn-secondary">Back to List</a>
+   </div>
 </form>
 
 

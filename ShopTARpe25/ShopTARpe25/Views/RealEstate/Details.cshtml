@@ -1,57 +1,51 @@
-﻿@model ShopTARpe25.Models.RealEstate.EstateDetailsViewModel
+﻿@model ShopTARpe25.Models.RealEstate.RealEstateDetailsViewModel
 
 <h1>Details</h1>
 
 <div>
-    <h4>RealEstate</h4>
+    <h4>RealEstates</h4>
     <hr />
-
     <dl class="row">
         <div class="form-group row">
-            <label asp-for="Id" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.Id)
+            <label asp-for="Id" class="col-sn-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Id)
+        </div>
+    </dl>
+    <dl class="row">
+        <div class="form-group row">
+            <label asp-for="Area" class="col-sn-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Area)
         </div>
     </dl>
 
     <dl class="row">
         <div class="form-group row">
-            <label asp-for="Area" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.Area)
+            <label asp-for="Address" class="col-sn-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.Address)
         </div>
     </dl>
-
     <dl class="row">
         <div class="form-group row">
-            <label asp-for="Address" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.Address)
+            <label asp-for="RoomNumber" class="col-sn-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.RoomNumber)
         </div>
     </dl>
-
     <dl class="row">
         <div class="form-group row">
-            <label asp-for="RoomNumber" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.RoomNumber)
+            <label asp-for="BuildingType" class="col-sn-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.BuildingType)
         </div>
     </dl>
-
     <dl class="row">
         <div class="form-group row">
-            <label asp-for="BuildingType" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.BuildingType)
+            <label asp-for="CreatedAt" class="col-sn-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.CreatedAt)
         </div>
     </dl>
-
     <dl class="row">
         <div class="form-group row">
-            <label asp-for="CreatedAt" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </div>
-    </dl>
-
-    <dl class="row">
-        <div class="form-group row">
-            <label asp-for="ModifiedAt" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.ModifiedAt)
+            <label asp-for="ModifiedAt" class="col-sn-2 col-form-label"></label>
+            @Html.DisplayFor(Model => Model.ModifiedAt)
         </div>
     </dl>
 
@@ -61,6 +55,8 @@
         <br />
     }
 
-    <a asp-action="Index" asp-controller="realestate" class="btn btn-danger">Back to List</a>
+</div>
 
+<div class="form-group">
+    <a asp-action="Index" asp-controller="RealEstate" type="" class="btn btn-primary btn-lg btn-outline-dark">Back to list</a>
 </div>
